@@ -1,13 +1,11 @@
-
-
-
 This project is a static web app that converts coordinates between UTM (Universal Transverse Mercator) and Latitude/Longitude (WGS84 datum). It’s aimed at geologists and others working with spatial data who want a simple, offline-friendly tool with a visual interface.
 
 ## Goal
 - Input UTM coordinates (Zone, Hemisphere, Easting, Northing) → Output Lat/Lon
-- Input Lat/Lon → Output UTM (auto-detect zone & hemisphere)
+- Input Lat/Lon → Output UTM (auto-detect zone & hemisphere but changeable if wanted)
 - Provide a clean, intuitive UI using only HTML, CSS, and JavaScript (no frameworks)
 - Optionally display the location on a map preview
+- -link to google maps
 
 ## File Overview
 ### /public/index.html

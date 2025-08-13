@@ -1,0 +1,194 @@
+/* --- Base / tokens ------------------------------------------------------- */
+:root {
+  --bg: #ffffff;
+  --bg-panel: #f7f8fa;
+  --text: #131417;
+  --muted: #5b616e;
+  --border: #d7dbe2;
+  --accent: #2563eb;     /* buttons/focus */
+  --accent-weak: #e6efff;
+  --ok: #0f9d58;
+  --ok-bg: #e9f6ef;
+  --error: #d93025;
+  --error-bg: #fdeaea;
+  --shadow: 0 1px 2px rgba(0,0,0,.06), 0 6px 24px rgba(0,0,0,.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0c0d10;
+    --bg-panel: #15171c;
+    --text: #e7e9ee;
+    --muted: #a2a9b6;
+    --border: #2a2f39;
+    --accent: #60a5fa;
+    --accent-weak: #102548;
+    --ok: #8bd2a8;
+    --ok-bg: #0e1b14;
+    --error: #ff8a80;
+    --error-bg: #2a1412;
+    --shadow: none;
+  }
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { font-size: 16px; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Page chrome --------------------------------------------------------- */
+.page-header, .page-footer {
+  padding: 1.25rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.page-footer { 
+  border-bottom: none; 
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+}
+.page-header h1 {
+  margin: 0 0 .25rem 0;
+  font-size: 1.5rem;
+  letter-spacing: .2px;
+}
+.subtitle {
+  margin: 0;
+  color: var(--muted);
+  font-size: .95rem;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* --- Panels -------------------------------------------------------------- */
+.panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: var(--shadow);
+}
+.panel h2 {
+  margin: 0 0 .75rem 0;
+  font-size: 1.25rem;
+}
+
+/* --- Forms --------------------------------------------------------------- */
+.form { display: grid; gap: .75rem; }
+
+.field { display: grid; gap: .35rem; }
+
+label {
+  font-weight: 600;
+  font-size: .95rem;
+}
+
+input[type="number"],
+select,
+output,
+.out,
+button {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fff0; /* transparent to inherit panel bg in dark mode */
+  color: var(--text);
+}
+
+input[type="number"],
+select {
+  padding: .7rem .8rem;
+  min-height: 44px;   /* touch target */
+}
+
+.help {
+  color: var(--muted);
+  font-size: .85rem;
+}
+
+/* Result box */
+.out,
+output {
+  display: block;
+  min-height: 44px;
+  padding: .7rem .8rem;
+  background: var(--accent-weak);
+  border-color: transparent;
+  border-radius: 10px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  word-break: break-word;
+}
+
+/* Buttons */
+.actions { margin-top: .25rem; }
+button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: .2px;
+  transition: transform .02s ease, filter .15s ease;
+}
+button:hover { filter: brightness(1.05); }
+button:active { transform: translateY(1px); }
+button:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+/* Focus styles (keyboard-friendly) */
+:focus-visible {
+  outline: 3px solid color-mix(in oklab, var(--accent) 60%, transparent);
+  outline-offset: 2px;
+  border-radius: 12px;
+}
+
+/* Validation helpers you’ll toggle from JS */
+.error {
+  border-color: var(--error) !important;
+  background: var(--error-bg) !important;
+}
+.ok {
+  border-color: var(--ok) !important;
+  background: var(--ok-bg) !important;
+}
+
+/* Layout tweaks for the Settings panel you placed after <main> */
+#datum-title { margin-top: .25rem; }
+#datum {
+  max-width: 360px;
+}
+
+/* --- Responsive spacing --------------------------------------------------- */
+@media (min-width: 900px) {
+  .page-header, .page-footer { padding: 1.2rem 0; }
+  .container { padding: 1.25rem; gap: 1.25rem; }
+  .panel { padding: 1.1rem; }
+}
+
+/* --- Motion & print ------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+@media print {
+  .page-header, .page-footer { display: none; }
+  .panel { box-shadow: none; background: #fff; }
+}
