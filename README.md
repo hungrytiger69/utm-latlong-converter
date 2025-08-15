@@ -1,33 +1,61 @@
-This project is a static web app that converts coordinates between UTM (Universal Transverse Mercator) and Latitude/Longitude (WGS84 datum). It’s aimed at geologists and others working with spatial data who want a simple, offline-friendly tool with a visual interface.
+# New Multi-page Static Starter (No Build)
 
-## Goal
-- Input UTM coordinates (Zone, Hemisphere, Easting, Northing) → Output Lat/Lon
-- Input Lat/Lon → Output UTM (auto-detect zone & hemisphere but changeable if wanted)
-- Provide a clean, intuitive UI using only HTML, CSS, and JavaScript (no frameworks)
-- Optionally display the location on a map preview
-- -link to google maps
+Minimal setup for a multi-page site on **Cloudflare Pages**, with a landing page, a Hello example, and a UTM app scaffold. Plain HTML/CSS/JS. No frameworks or bundlers.
 
-## File Overview
-### /public/index.html
-- HTML page layout for the GUI.
+## Core ideas
+- Files map to URLs. Example: `/apps/utm/index.html` → `/apps/utm/`.
+- Each app lives under `/apps/<name>/`.
+- Shared assets under `/assets/`.
+- Use `<script defer>` when your JS needs the DOM or other scripts.
 
-### /public/styles.css
-- CSS styling for layout and colors.
+## Structure
+```
+/index.html            # landing page
+/apps/hello/
+  index.html           # example app
+  main.js              # per-app JS
+/apps/utm/
+  index.html           # UTM app page (loads proj4)
+  main.js              # paste your converter IIFE here
+/assets/
+  css/main.css         # shared styles
+  js/site.js           # tiny site helpers
+/_redirects            # short links (/hello, /utm)
+/_headers              # security & long cache for /assets/*
+/404.html              # custom not-found
+```
 
-### /public/main.js
-- JavaScript logic for handling conversions.
+## Deploy (Direct Upload)
+1. Cloudflare Dashboard → **Pages** → Create project → **Upload assets**.
+2. Drag the folder with these files.
+3. Add your **Custom Domain** under Pages → Custom domains (CNAME).
 
-### /assets/
-- Optional images, icons, or branding.
+## URLs
+- `/` → landing
+- `/apps/hello/` (or `/hello`)
+- `/apps/utm/` (or `/utm`)
 
-### /tests/test-data.txt
-- Known coordinate pairs for validation.
+## Add your converter
+- Put your working IIFE into `apps/utm/main.js` (it already logs whether proj4 is loaded).
+- Keep proj4 load in `apps/utm/index.html`:
+  ```html
+  <script src="https://cdn.jsdelivr.net/npm/proj4/dist/proj4.js" defer></script>
+  <script src="/apps/utm/main.js" defer></script>
+  ```
 
-## How to Implement
-1. **HTML**: Create form inputs for UTM and Lat/Lon, buttons to trigger conversion, and output sections for results.
-2. **CSS**: Style the layout, make it responsive, ensure good contrast for field use.
-3. **JavaScript**: Implement conversion formulas or use proj4js, add event listeners, validate input, update outputs.
-4. **Testing**: Use sample data to verify accuracy, check round-trip conversions.
+## Cache tips
+- `/assets/*` is set to long-cache. When you change `main.css` or `site.js`, bump a version query in HTML:
+  ```html
+  <link rel="stylesheet" href="/assets/css/main.css?v=2">
+  <script defer src="/assets/js/site.js?v=2"></script>
+  ```
 
-## Running the Project
-Open `/public/index.html` in any modern web browser — no server needed.
+## Local test
+- Open `index.html` directly, or run a tiny server:
+  ```bash
+  python3 -m http.server 8080
+  ```
+  Visit `http://localhost:8080`.
+
+## When to consider Vite (later)
+- You want TypeScript/SCSS, bundling, minification, or hashed filenames. Then build to `/dist` and deploy that folder.
