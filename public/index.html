@@ -5,26 +5,42 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>My Tools</title>
   <link rel="stylesheet" href="assets/css/main.css"/>
-  <script defer src="">"assets/js/site.js"</script>
+  <!-- Fix: move src into the attribute, remove stray quotes -->
+  <script defer src="assets/js/site.js"></script>
 </head>
 <body>
-  <header class="site-header">
-    <h1>Matthew's Cool Geological Tools</h1>
+  <!-- Use your page chrome classes -->
+  <header class="page-header">
+    <div class="container" style="grid-template-columns: 1fr;">
+      <div>
+        <h1>Matthew's Cool Geological Tools</h1>
+        <p class="subtitle">Handy utilities for mapping, coordinates, and more.</p>
+      </div>
+    </div>
+  </header>
+
   <main class="container">
-    <section class="grid">
-      <a class="card" href="apps/hello/">
-        <h2>Hello App</h2>
-        <p>Minimal example page to prove routing + JS wiring.</p>
-      </a>
-      <a class="card" href="apps/utm2">
-        <h2>UTM to Lat/Lon</h2>
-        <p>Coordinate conversion with WGS84 / NAD83 / NAD27 / SIRGAS2000.</p>
-      </a>
-    </section>
+    <!-- Each link is a panel “card” -->
+    <a class="panel card" href="apps/hello/" aria-label="Open Hello App">
+      <h2>Hello App</h2>
+      <p>Minimal example page to prove routing + JS wiring.</p>
+    </a>
+
+    <a class="panel card" href="apps/utm2/" aria-label="Open UTM to Lat/Lon">
+      <h2>UTM to Lat/Lon</h2>
+      <p>Coordinate conversion with WGS84 / NAD83 / NAD27 / SIRGAS2000.</p>
+    </a>
+
+    <a class="panel card" href="apps/declination-finder/" aria-label="Open Declination Finder">
+      <h2>Declination Finder</h2>
+      <p>Finds magnetic declination for your location/date.</p>
+    </a>
   </main>
 
-  <footer class="site-footer">
-    <small>© <span id="year"></span> Matthew Dunkerley</small>
+  <footer class="page-footer">
+    <div class="container" style="grid-template-columns: 1fr;">
+      <small>© <span id="year"></span> Matthew Dunkerley</small>
+    </div>
   </footer>
 </body>
 </html>
