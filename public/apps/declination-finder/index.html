@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Declination Finder (offline)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root { font-family: system-ui, sans-serif; }
+    body { margin: 0; padding: 24px; }
+    label { display:block; margin: 8px 0 4px; }
+    input, button, select { font: inherit; padding: 8px; }
+    .row { display:flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .card { border: 1px solid #ddd; border-radius: 8px; padding: 16px; max-width: 640px; }
+    .muted { color: #666; font-size: 0.9em; }
+    #status { margin-top: 8px; }
+    #result { font-size: 1.25rem; margin-top: 12px; }
+  </style>
+</head>
+<body>
+  <h1>Declination Finder</h1>
+
+  <div class="card">
+    <p class="muted">This works fully in your browser using the World Magnetic Model (no API).</p>
+
+    <div id="status" class="muted">Waiting…</div>
+
+    <label for="lat">Latitude (°)</label>
+    <input id="lat" type="number" step="any" placeholder="e.g., 43.6532">
+
+    <label for="lon">Longitude (°)</label>
+    <input id="lon" type="number" step="any" placeholder="-79.3832 for W is negative">
+
+    <label for="date">Date</label>
+    <input id="date" type="date">
+
+    <div class="row" style="margin-top:12px">
+      <button id="btn-geolocate">Use My Location</button>
+      <button id="btn-compute">Compute</button>
+    </div>
+
+    <div id="result"></div>
+  </div>
+
+  <!-- note: module so we can import the library -->
+  <script type="module" src="main.js"></script>
+</body>
+</html>

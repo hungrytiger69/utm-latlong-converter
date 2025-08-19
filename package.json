@@ -1,0 +1,22 @@
+{
+  "name": "utm-latlong-converter",
+  "version": "1.0.0",
+  "description": "a static website that has multiple useful geological goodies",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hungrytiger69/utm-latlong-converter.git"
+  },
+  "author": "Matthew Dunkerley",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hungrytiger69/utm-latlong-converter/issues"
+  },
+  "homepage": "https://github.com/hungrytiger69/utm-latlong-converter#readme"
+}
